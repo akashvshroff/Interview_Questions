@@ -55,6 +55,8 @@ def check_intervals(times, limits, meeting_time):
         final.append([limits[0], times[0][0]])
     for i in range(len(times)-1):
         curr_end, next_begin = times[i][1], times[i+1][0]
+        if not larger_time(curr_end, limits[0]) or not larger_time(limits[1], next_begin):
+            continue
         if check_difference(next_begin, curr_end, meeting_time):  # time after a meeting
             final.append([curr_end, next_begin])
     if check_difference(limits[1], times[-1][1], meeting_time):  # time after last meeting
